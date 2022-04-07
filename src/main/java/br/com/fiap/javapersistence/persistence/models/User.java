@@ -1,4 +1,4 @@
-package br.com.fiap.javapersistence.persistence.jpa.user;
+package br.com.fiap.javapersistence.persistence.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,11 +14,15 @@ public class User {
 
     @Column(nullable = false)
 	private String name;
+
+    @Column(nullable = false)
+	private String email;
     
 
-    public User(String name)
+    public User(String name, String email)
     {
         this.setName(name);
+        this.setEmail(email);
     }
 
     public User(){}
@@ -39,5 +43,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
