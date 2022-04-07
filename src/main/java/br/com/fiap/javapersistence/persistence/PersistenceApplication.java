@@ -1,4 +1,4 @@
-package br.com.fiap.persistence.persistence;
+package br.com.fiap.javapersistence.persistence;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

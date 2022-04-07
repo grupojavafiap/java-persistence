@@ -1,4 +1,4 @@
-package br.com.fiap.persistence.persistence;
+package br.com.fiap.javapersistence.persistence;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

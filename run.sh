@@ -1,0 +1,1 @@
+./mvnw install -DskipTests && sudo docker-compose up --build
