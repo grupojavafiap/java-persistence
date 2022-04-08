@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import br.com.fiap.javapersistence.persistence.models.User;
 
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{}

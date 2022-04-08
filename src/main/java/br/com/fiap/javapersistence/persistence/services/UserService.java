@@ -1,6 +1,7 @@
 package br.com.fiap.javapersistence.persistence.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,25 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    /**
+     * Retorna o usuário a partir do id informado
+     * 
+     * @param id
+     * @return
+     */
+    public Optional<User> findById(long id)
+    {
+        return userRepository.findById(id);
+    }
 
+
+    /**
+     * Exclui o usuário com o ID passado.
+     * 
+     * @param id
+     */
+    public void deleleById(long id)
+    {
+         userRepository.deleteById(id);
+    }
 }
