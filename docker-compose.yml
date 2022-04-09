@@ -22,7 +22,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8081:8080
+      - 8080:8080
     networks: 
       - app_network
       
@@ -44,7 +44,7 @@ services:
       - db-mysql
       - redis
     ports:
-      - 8080:8080
+      - 8000:8000
     networks:
       - app_network
     #environment:
