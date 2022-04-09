@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import javax.validation.constraints.Email;
 
 @NotNull
-public class UserDto {
+public class CustomerDto {
 
     @NotBlank
     @Size(max = 5)

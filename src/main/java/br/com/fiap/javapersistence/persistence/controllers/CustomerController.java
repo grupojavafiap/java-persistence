@@ -16,29 +16,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.javapersistence.persistence.dtos.UserDto;
-import br.com.fiap.javapersistence.persistence.models.User;
-import br.com.fiap.javapersistence.persistence.services.UserService;
+import br.com.fiap.javapersistence.persistence.dtos.CustomerDto;
+import br.com.fiap.javapersistence.persistence.models.Customer;
+import br.com.fiap.javapersistence.persistence.services.CustomerService;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class CustomerController {
     
-    final UserService userService;
+    final CustomerService userService;
 
-    public UserController(UserService userService) {
+    public CustomerController(CustomerService userService) {
         this.userService = userService;
     }
 
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() 
+    public ResponseEntity<List<Customer>> findAll() 
     {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable long id) 
+    public ResponseEntity<Optional<Customer>> findById(@PathVariable long id) 
     {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
     }
@@ -53,9 +53,9 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody @Valid UserDto userDto)
+    public ResponseEntity<Customer> save(@RequestBody @Valid CustomerDto customerDto)
     {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(customerDto));
     }
 
 }

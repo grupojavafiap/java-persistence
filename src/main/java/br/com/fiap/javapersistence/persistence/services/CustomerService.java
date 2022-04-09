@@ -6,16 +6,16 @@ import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.javapersistence.persistence.dtos.UserDto;
-import br.com.fiap.javapersistence.persistence.models.User;
-import br.com.fiap.javapersistence.persistence.repositories.UserRepository;
+import br.com.fiap.javapersistence.persistence.dtos.CustomerDto;
+import br.com.fiap.javapersistence.persistence.models.Customer;
+import br.com.fiap.javapersistence.persistence.repositories.CustomerRepository;
 
 @Service
-public class UserService {
+public class CustomerService {
 
-    final UserRepository userRepository;
+    final CustomerRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public CustomerService(CustomerRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -26,12 +26,12 @@ public class UserService {
      * @param user
      * @return
      */
-    public User save(UserDto userDto)
+    public Customer save(CustomerDto customerDto)
     {
-        var user = new User();
-        BeanUtils.copyProperties(userDto, user);
+        var customer = new Customer();
+        BeanUtils.copyProperties(customerDto, customer);
 
-        return userRepository.save(user);
+        return userRepository.save(customer);
     }
 
     /**
@@ -39,7 +39,7 @@ public class UserService {
      * 
      * @return
      */
-    public List<User> findAll()
+    public List<Customer> findAll()
     {
         return userRepository.findAll();
     }
@@ -50,7 +50,7 @@ public class UserService {
      * @param id
      * @return
      */
-    public Optional<User> findById(long id)
+    public Optional<Customer> findById(long id)
     {
         return userRepository.findById(id);
     }
