@@ -1,16 +1,24 @@
 package br.com.fiap.javapersistence.persistence.models;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class Customer {
 
     @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
+    @Column(nullable = false)
 	private Long cpf;
 
     @Column(nullable = false)
@@ -24,9 +32,20 @@ public class Customer {
 
     @Column(nullable = false)
     private String username;
+
+    @OneToMany(mappedBy = "customerOrders", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Orders> orders;
     
-    @OneToMany
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> address;
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getCpf() {
         return cpf;
@@ -68,6 +87,14 @@ public class Customer {
         this.username = username;
     }
 
+    public List<Orders> getOrders() {
+        return this.orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
     public List<Address> getAddress() {
         return address;
     }
@@ -75,8 +102,4 @@ public class Customer {
     public void setAddress(List<Address> address) {
         this.address = address;
     }
-
-
-
-
 }

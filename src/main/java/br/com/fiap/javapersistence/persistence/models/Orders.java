@@ -4,16 +4,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-public class Order {
+public class Orders {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,10 +26,26 @@ public class Order {
     @Column(nullable = false)
     private BigDecimal totalPrice;
 
-    @ManyToOne
-    private Customer customer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customerOrders;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(
+        name = "orders_product",
+        joinColumns = {
+            @JoinColumn(
+                name = "orders_id",
+                referencedColumnName = "id",
+                nullable = false,
+                updatable = false)},
+        inverseJoinColumns = {
+            @JoinColumn(
+                name = "product_id",
+                referencedColumnName = "id",
+                nullable = false,
+                updatable = false)}
+    )
     private List<Product> products;
 
     public Long getId() {
@@ -44,13 +64,13 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Customer getCustomerOrders() {
+        return this.customerOrders;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    public void setCustomerOrders(Customer customerOrders) {
+        this.customerOrders = customerOrders;
+    }   
 
     public List<Product> getProducts() {
         return products;

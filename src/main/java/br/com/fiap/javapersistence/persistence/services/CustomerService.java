@@ -1,5 +1,4 @@
 package br.com.fiap.javapersistence.persistence.services;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +12,11 @@ import br.com.fiap.javapersistence.persistence.repositories.CustomerRepository;
 @Service
 public class CustomerService {
 
-    final CustomerRepository userRepository;
+    final CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomerService(
+        CustomerRepository customerRepository) {
+            this.customerRepository = customerRepository;
     }
 
 
@@ -31,7 +31,7 @@ public class CustomerService {
         var customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
 
-        return userRepository.save(customer);
+        return customerRepository.save(customer);
     }
 
     /**
@@ -41,7 +41,7 @@ public class CustomerService {
      */
     public List<Customer> findAll()
     {
-        return userRepository.findAll();
+        return customerRepository.findAll();
     }
 
     /**
@@ -52,9 +52,13 @@ public class CustomerService {
      */
     public Optional<Customer> findById(long id)
     {
-        return userRepository.findById(id);
+        return customerRepository.findById(id);
     }
 
+    public List<Customer> findByCpf(long cpf)
+    {
+        return customerRepository.findByCpf(cpf);
+    }
 
     /**
      * Exclui o usuário com o ID passado.
@@ -63,6 +67,6 @@ public class CustomerService {
      */
     public void deleleById(long id)
     {
-         userRepository.deleteById(id);
+        customerRepository.deleteById(id);
     }
 }

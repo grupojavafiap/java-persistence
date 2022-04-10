@@ -21,41 +21,46 @@ import br.com.fiap.javapersistence.persistence.models.Customer;
 import br.com.fiap.javapersistence.persistence.services.CustomerService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/customer")
 public class CustomerController {
     
-    final CustomerService userService;
+    final CustomerService customerService;
 
-    public CustomerController(CustomerService userService) {
-        this.userService = userService;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
 
     @GetMapping
     public ResponseEntity<List<Customer>> findAll() 
     {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Customer>> findById(@PathVariable long id) 
     {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.findById(id));
+    }
+
+    @GetMapping("/cpf/{cpf}")
+    public ResponseEntity<List<Customer>> findByCpf(@PathVariable long cpf) 
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.findByCpf(cpf));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable long id) 
     {
-        userService.deleleById(id);
+        customerService.deleleById(id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-
     @PostMapping
     public ResponseEntity<Customer> save(@RequestBody @Valid CustomerDto customerDto)
     {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(customerDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.save(customerDto));
     }
 
 }

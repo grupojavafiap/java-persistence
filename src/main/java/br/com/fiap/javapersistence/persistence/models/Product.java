@@ -7,8 +7,10 @@ import javax.persistence.ManyToMany;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -29,12 +31,12 @@ public class Product {
     private BigDecimal price;
 
 
-    @ManyToMany
-    @JoinTable(
-        name = "Product_Order", 
-        joinColumns = @JoinColumn(name = "product_id"), 
-        inverseJoinColumns = @JoinColumn(name = "order_id"))        
-    private List<Order> orders;
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = "products")
+    // @JoinTable(
+    //     name = "Product_Order", 
+    //     joinColumns = @JoinColumn(name = "product_id"), 
+    //     inverseJoinColumns = @JoinColumn(name = "orders_id"))        
+    private List<Orders> orders;
 
 
     public Long getId() {
@@ -77,12 +79,12 @@ public class Product {
     }
 
 
-    public List<Order> getOrders() {
+    public List<Orders> getOrders() {
         return orders;
     }
 
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<Orders> orders) {
         this.orders = orders;
     }   
 
