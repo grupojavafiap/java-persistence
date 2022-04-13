@@ -1,13 +1,15 @@
 package br.com.fiap.javapersistence.persistence.models;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -33,11 +35,26 @@ public class Customer {
     @Column(nullable = false)
     private String username;
 
-    @OneToMany(mappedBy = "customerOrders", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customerOrders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Orders> orders;
     
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Address> address;
+
+    public Customer() {
+    }
+
+    public Customer(Long cpf, String name, String email, String gender, String username, List<Orders> orders, List<Address> address) {
+        this.cpf = cpf;
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+        this.username = username;
+        this.orders = orders;
+        this.address = address;
+    }
 
     public Long getId() {
         return this.id;
@@ -101,5 +118,19 @@ public class Customer {
 
     public void setAddress(List<Address> address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", cpf='" + getCpf() + "'" +
+            ", name='" + getName() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", gender='" + getGender() + "'" +
+            ", username='" + getUsername() + "'" +
+            ", orders='" + getOrders() + "'" +
+            ", address='" + getAddress() + "'" +
+            "}";
     }
 }

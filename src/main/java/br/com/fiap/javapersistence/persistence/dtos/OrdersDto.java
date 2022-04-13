@@ -5,19 +5,18 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import br.com.fiap.javapersistence.persistence.models.Customer;
-import br.com.fiap.javapersistence.persistence.models.Product;
-
 public class OrdersDto {
 
     @NotNull
     private BigDecimal totalPrice;
 
     @NotNull
-    private Customer customer;
+    // private CustomerDto customer;
+    private Long customerId;
 
     @NotNull
-    private List<Product> products;    
+    //private List<ProductDto> products;    
+    private List<Long> productsId;
 
     public BigDecimal getTotalPrice() {
         return this.totalPrice;
@@ -27,19 +26,37 @@ public class OrdersDto {
         this.totalPrice = totalPrice;
     }
 
-    public Customer getCustomer() {
+    /*
+    public CustomerDto getCustomer() {
         return this.customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(CustomerDto customer) {
         this.customer = customer;
     }
 
-    public List<Product> getProducts() {
+    public List<ProductDto> getProducts() {
         return this.products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<ProductDto> products) {
         this.products = products;
+    }
+    */
+
+    public Long getCustomerId() {
+        return this.customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
+    public List<Long> getProductsId() {
+        return this.productsId;
+    }
+
+    public void setProductsId(List<Long> productsId) {
+        this.productsId = productsId;
     }
 }

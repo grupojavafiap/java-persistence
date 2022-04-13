@@ -1,13 +1,12 @@
 package br.com.fiap.javapersistence.persistence.models;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import java.math.BigDecimal;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.CascadeType;
+import java.math.BigDecimal;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,12 +30,13 @@ public class Product {
     private BigDecimal price;
 
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = "products")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
     // @JoinTable(
-    //     name = "Product_Order", 
-    //     joinColumns = @JoinColumn(name = "product_id"), 
-    //     inverseJoinColumns = @JoinColumn(name = "orders_id"))        
-    private List<Orders> orders;
+    //       name = "Product_Order", 
+    //       joinColumns = @JoinColumn(name = "product_id"), 
+    //       inverseJoinColumns = @JoinColumn(name = "orders_id"))    
+    @JsonManagedReference    
+    private Set<Orders> orders;
 
 
     public Long getId() {
@@ -78,15 +78,12 @@ public class Product {
         this.price = price;
     }
 
-
-    public List<Orders> getOrders() {
+    public Set<Orders> getOrders() {
         return orders;
     }
 
 
-    public void setOrders(List<Orders> orders) {
+    public void setOrders(Set<Orders> orders) {
         this.orders = orders;
     }   
-
-
 }

@@ -1,4 +1,5 @@
 package br.com.fiap.javapersistence.persistence.services;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -6,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.javapersistence.persistence.dtos.CustomerDto;
+import br.com.fiap.javapersistence.persistence.models.Address;
 import br.com.fiap.javapersistence.persistence.models.Customer;
 import br.com.fiap.javapersistence.persistence.repositories.CustomerRepository;
 
@@ -29,7 +31,25 @@ public class CustomerService {
     public Customer save(CustomerDto customerDto)
     {
         var customer = new Customer();
+        
         BeanUtils.copyProperties(customerDto, customer);
+
+        if(customerDto.getAddress() != null)
+        {
+            List<Address> listAddress = new ArrayList<>();
+            
+            for(int i=0; i<customerDto.getAddress().size(); i++)
+            {
+                Address address = new Address();
+                address.setCep(customerDto.getAddress().get(i).getCep());
+                address.setDescription(customerDto.getAddress().get(i).getDescription());
+                address.setState(customerDto.getAddress().get(i).getDescription());
+                address.setCustomer(customer);
+                listAddress.add(address);
+            }
+
+            customer.setAddress(listAddress);
+        }
 
         return customerRepository.save(customer);
     }

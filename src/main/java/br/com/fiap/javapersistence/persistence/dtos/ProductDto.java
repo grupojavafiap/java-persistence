@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import br.com.fiap.javapersistence.persistence.models.Orders;
 
 public class ProductDto {
 
@@ -19,7 +18,7 @@ public class ProductDto {
     @NotNull
     private BigDecimal price;
 
-    private List<Orders> orders;
+    // private List<Orders> orders;
 
     public String getName() {
         return this.name;
@@ -44,7 +43,8 @@ public class ProductDto {
     public void setPrice(BigDecimal price) {
         this.price = price;
     } 
-    
+
+    /*
     public List<Orders> getOrders() {
         return this.orders;
     }
@@ -52,4 +52,5 @@ public class ProductDto {
     public void setOrders(List<Orders> orders) {
         this.orders = orders;
     }
+    */
 }

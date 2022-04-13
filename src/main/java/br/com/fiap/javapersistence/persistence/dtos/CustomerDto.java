@@ -4,8 +4,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import br.com.fiap.javapersistence.persistence.models.Address;
-import br.com.fiap.javapersistence.persistence.models.Orders;
 
 import java.util.List;
 
@@ -32,9 +30,7 @@ public class CustomerDto {
     private String username;
 
     @NotNull
-    private List<Address> address;
-
-    private List<Orders> orders;
+    private List<AddressDto> address;
 
     public Long getCpf() {
         return this.cpf;
@@ -76,19 +72,11 @@ public class CustomerDto {
         this.username = username;
     }
 
-    public List<Address> getAddress() {
+    public List<AddressDto> getAddress() {
         return this.address;
     }
 
-    public void setAddress(List<Address> address) {
+    public void setAddress(List<AddressDto> address) {
         this.address = address;
-    }
-
-    public List<Orders> getOrders() {
-        return this.orders;
-    }
-
-    public void setOrders(List<Orders> orders) {
-        this.orders = orders;
     }
 }

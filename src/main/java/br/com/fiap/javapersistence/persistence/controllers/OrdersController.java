@@ -41,12 +41,6 @@ public class OrdersController {
         return ResponseEntity.status(HttpStatus.OK).body(ordersService.findById(id));
     }
 
-    @GetMapping("/cpf/{cpf}")
-    public ResponseEntity<List<Orders>> findByCpf(@PathVariable long cpf) 
-    {
-        return ResponseEntity.status(HttpStatus.OK).body(ordersService.findOrdersByCpf(cpf));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable long id) 
     {
@@ -56,7 +50,7 @@ public class OrdersController {
     }
 
     @PostMapping
-    public ResponseEntity<Orders> save(@RequestBody @Valid OrdersDto ordersDto)
+    public ResponseEntity<Orders> save(@RequestBody @Valid OrdersDto ordersDto) throws Exception
     {
         return ResponseEntity.status(HttpStatus.CREATED).body(ordersService.save(ordersDto));
     }

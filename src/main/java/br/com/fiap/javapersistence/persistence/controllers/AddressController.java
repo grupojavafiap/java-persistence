@@ -41,24 +41,10 @@ public class AddressController {
         return ResponseEntity.status(HttpStatus.OK).body(addressService.findById(id));
     }
 
-    @GetMapping("/addressbycpf/{cpf}")
-    public ResponseEntity<List<Address>> findAddressByCpf(@PathVariable long cpf) 
-    {
-        return ResponseEntity.status(HttpStatus.OK).body(addressService.findAddressByCpf(cpf));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable long id) 
     {
         addressService.deleleById(id);
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
-    @DeleteMapping("/deleteAddress/{cpf}")
-    public ResponseEntity<Object> deleteAddressByCpf(@PathVariable long cpf) 
-    {
-        addressService.deleteAddressByCpf(cpf);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

@@ -26,18 +26,9 @@ public class AddressService {
         return addressRepository.findById(id);
     }
 
-    public List<Address> findAddressByCpf(Long cpf) {
-        return addressRepository.findAddressByCpf(cpf);
-    }
-
     public void deleleById(long id)
     {
         addressRepository.deleteById(id);
-    }
-
-    public void deleteAddressByCpf(long cpf)
-    {
-        addressRepository.deleteAddressByCpf(cpf);
     }
 
     public Address save(AddressDto addressDto)

@@ -18,75 +18,46 @@ Para rodar o projeto basta executar o script *run.sh*
 - product-controller
 ```
 	{
-		"name": "TV",
-		"amount": 10,
-		"price": 7500.00
+		"name": "Faca",
+  		"amount": 20,
+  		"price": 8.50
 	}
 ```
 
 - customer-controller
 ```
 	{
-		"cpf": 12345678,
-		"name": "Nome Teste",
-		"email": "teste@gmail.com",
-		"gender": "M",
-		"username": "teste.teste",
-		"address": [
-			{
-				"cep": "12345-123",
-				"state": "MG",
-				"description": "Apto"
-			}
-		],
-		"orders": []
+ 		 "cpf": 12345678901,
+  		 "name": "Nome Teste",
+		 "email": "teste@teste.com.br",
+  		 "gender": "M",
+  		 "username": "teste",
+  		 "address": [
+			   {
+				   "cep": "70790-120",
+				   "state": "DF",
+				   "description": "Kit"
+			   }
+  		 ]
 	}
 ```
 
 - address-controller
 ```
 	{
-		"cep": "06056-111",
-		"state": "RS",
-		"description": "Sul"
+		"cep": "70790-121",
+		"state": "DF",
+		"description": "Kits"
 	}
 ```
 
 - orders-controller POST
 ```
 	{
-		"totalPrice": 2000.50,
-		"customer": 
-		{
-			"cpf": 11111111111,
-			"name": "Cesar d",
-			"email": "lira@gmail.com",
-			"gender": "M",
-			"username": "mmmmm",
-			"orders": [],
-			"address": [
-				{
-					"cep": "06056-140",
-					"state": "SP",
-					"description": "Casa"
-				}	
-			]
-		},
-		"products": [
-			{
-				"id": 1,
-				"name": "Celular",
-				"amount": 10,
-				"price": 2000.00,
-				"orders": []
-			},
-			{
-				"id": 2,
-				"name": "Impressora",
-				"amount": 10,
-				"price": 600.00,
-				"orders": []
-			}
+		"totalPrice": 100,
+		"customerId": 3,
+		"productsId": [
+			4, 5
 		]
 	}
 ```

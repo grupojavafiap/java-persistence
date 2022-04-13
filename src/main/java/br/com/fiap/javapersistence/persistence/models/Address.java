@@ -2,10 +2,11 @@ package br.com.fiap.javapersistence.persistence.models;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -25,9 +26,21 @@ public class Address {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
+
+
+    public Address() {
+    }
+
+    public Address(String cep, String state, String description, Customer customer) {
+        this.cep = cep;
+        this.state = state;
+        this.description = description;
+        this.customer = customer;
+    }
 
     public Long getId() {
         return id;
@@ -55,6 +68,25 @@ public class Address {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Customer getCustomer() {
+        return this.customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", cep='" + getCep() + "'" +
+            ", state='" + getState() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", customer='" + getCustomer() + "'" +
+            "}";
     }
 
 }

@@ -4,10 +4,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,27 +27,19 @@ public class Orders {
     @Column(nullable = false)
     private BigDecimal totalPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customerOrders;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "orders_product",
-        joinColumns = {
-            @JoinColumn(
-                name = "orders_id",
-                referencedColumnName = "id",
-                nullable = false,
-                updatable = false)},
-        inverseJoinColumns = {
-            @JoinColumn(
-                name = "product_id",
-                referencedColumnName = "id",
-                nullable = false,
-                updatable = false)}
+        joinColumns = @JoinColumn(name = "orders_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> products;
+    @JsonBackReference
+    private Set<Product> products;
 
     public Long getId() {
         return id;
@@ -65,20 +58,18 @@ public class Orders {
     }
 
     public Customer getCustomerOrders() {
-        return this.customerOrders;
+         return this.customerOrders;
     }
 
     public void setCustomerOrders(Customer customerOrders) {
-        this.customerOrders = customerOrders;
+         this.customerOrders = customerOrders;
     }   
 
-    public List<Product> getProducts() {
+    public Set<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
     }
-
-
 }
