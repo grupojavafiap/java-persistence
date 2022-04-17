@@ -16,7 +16,7 @@ Projeto da disciplina Persistencia em Java - Avaliação da Disciplina - MBA FIA
 
 
 ## MER 
-//TODO: IMAGEM DO DIAGRAMA
+![alt text](src/main/java/br/com/fiap/javapersistence/persistence/docs/schema.png)
 
 
 ## Rodar o projeto
