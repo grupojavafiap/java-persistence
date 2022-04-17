@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.javapersistence.persistence.dtos.CustomerDto;
 import br.com.fiap.javapersistence.persistence.models.Customer;
 import br.com.fiap.javapersistence.persistence.services.CustomerService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/customer")
+@Tag(name = "Clientes", description = "Recursos da API de Clientes")
 public class CustomerController {
     
     final CustomerService customerService;

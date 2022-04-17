@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.javapersistence.persistence.dtos.AddressDto;
 import br.com.fiap.javapersistence.persistence.models.Address;
 import br.com.fiap.javapersistence.persistence.services.AddressService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/address")
+@Tag(name = "Endereços", description = "Recursos da API de Endereço")
 public class AddressController {
 
     final AddressService addressService;

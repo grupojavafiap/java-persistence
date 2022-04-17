@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.javapersistence.persistence.dtos.ProductDto;
 import br.com.fiap.javapersistence.persistence.models.Product;
 import br.com.fiap.javapersistence.persistence.services.ProductService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/product")
+@Tag(name = "Produtos", description = "Recursos da API de Produtos")
 public class ProductController {
 
     final ProductService productService;

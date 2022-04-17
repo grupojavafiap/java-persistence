@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.javapersistence.persistence.dtos.OrdersDto;
 import br.com.fiap.javapersistence.persistence.models.Orders;
 import br.com.fiap.javapersistence.persistence.services.OrdersService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/orders")
+@Tag(name = "Pedidos", description = "Recursos da API de Pedidos")
 public class OrdersController {
 
     final OrdersService ordersService;
