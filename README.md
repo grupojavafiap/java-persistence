@@ -1,6 +1,22 @@
 # Java Persistence
-Projeto da disciplina persistence - MBA FIAP
+Projeto da disciplina Persistencia em Java - Avaliação da Disciplina - MBA FIAP.
+- Spring Boot
+- Spring Data
+- MySQL 5
+- Redis
+- Open API (Swagger)
 
+## Itens implementados
+ - Escrita de modelo do banco de dados
+ - Definição das entidades necessárias
+ - Desenvolvimento de projeto Java
+ - Spring Data JPA + Cache Redis
+ - Elaboração de Dockerfile e Docker Compose
+ - Implementação do Open API(Swagger) para documentação e testes do recursos da API.
+
+
+## MER 
+//TODO: IMAGEM DO DIAGRAMA
 
 
 ## Rodar o projeto
@@ -9,7 +25,7 @@ Para rodar o projeto basta executar o script *run.sh*
 ./run.sh
 ```
 
-## Acessar  a aplicação
+## Acessar Aplicação 
 
 - Acesse a aplicação na URL -> `http://localhost:8000/swagger-ui.html`
 

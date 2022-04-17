@@ -3,15 +3,13 @@ version: '3'
 services:
   # Configuções para o MySQL
   db-mysql:
-    image: mysql:8.0
+    image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=app_db
-      #- MYSQL_USER=app_user
-      #- MYSQL_PASSWORD=app_pass
       
     volumes:
-      - "~/data:/var/lib/mysql"
+      - "~/data_db:/var/lib/mysql"
     ports:
       - 3306:3306
     networks:
@@ -27,7 +25,7 @@ services:
       - app_network
       
   # Configurações para o Redis
-  redis:
+  redis_service:
     image: 'bitnami/redis:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
@@ -42,19 +40,11 @@ services:
     restart: on-failure
     depends_on:
       - db-mysql
-      - redis
+      - redis_service
     ports:
       - 8000:8000
     networks:
       - app_network
-    #environment:
-    #  SPRING_DATASOURCE_URL: jdbc:mysql://db-mysql:3306/app_db?useSSL=false&allowPublicKeyRetrieval=true
-    #environment:
-    #  - DATABASE_HOST=db-mysql
-    #  - DATABASE_USER=app_user
-    #  - DATABASE_PASSWORD=app_pass
-    #  - DATABASE_NAME=app_db
-    #  - DATABASE_PORT=3306
 
 networks:
   app_network:
