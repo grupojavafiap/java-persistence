@@ -7,6 +7,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import org.springframework.cache.annotation.Caching;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+
+
 import br.com.fiap.javapersistence.persistence.dtos.CustomerDto;
 import br.com.fiap.javapersistence.persistence.models.Address;
 import br.com.fiap.javapersistence.persistence.models.Customer;
@@ -29,6 +34,10 @@ public class CustomerService {
      * @param user
      * @return
      */
+    @Caching(
+		put= { @CachePut(value= "customerCache", key= "#customer.id") },
+		evict= { @CacheEvict(value= "allCustomer", allEntries= true) }
+	)
     public Customer save(CustomerDto customerDto)
     {
         var customer = new Customer();
@@ -51,7 +60,6 @@ public class CustomerService {
 
             customer.setAddress(listAddress);
         }
-
         return customerRepository.save(customer);
     }
 
@@ -60,7 +68,7 @@ public class CustomerService {
      * 
      * @return
      */
-    @Cacheable(cacheNames = "Customer", key="#root.method.name")
+    @Cacheable(value = "allCustomer", unless= "#result.size() == 0")
     public List<Customer> findAll()
     {
         return customerRepository.findAll();
@@ -72,11 +80,13 @@ public class CustomerService {
      * @param id
      * @return
      */
+    @Cacheable(value= "customerCache", key= "#id")
     public Optional<Customer> findById(long id)
     {
         return customerRepository.findById(id);
     }
 
+    @Cacheable(value= "customerCache", key= "#cpf")
     public List<Customer> findByCpf(long cpf)
     {
         return customerRepository.findByCpf(cpf);
@@ -87,6 +97,12 @@ public class CustomerService {
      * 
      * @param id
      */
+	@Caching(
+		evict= { 
+			@CacheEvict(value= "customerCache", key= "#id"),
+			@CacheEvict(value= "allCustomer", allEntries= true)
+		}
+	) 
     public void deleleById(long id)
     {
         customerRepository.deleteById(id);

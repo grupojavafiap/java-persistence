@@ -79,4 +79,12 @@ public class CustomerDto {
     public void setAddress(List<AddressDto> address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerDto [address=" + address + ", cpf=" + cpf + ", email=" + email + ", gender=" + gender
+                + ", name=" + name + ", username=" + username + "]";
+    }
+
+    
 }
